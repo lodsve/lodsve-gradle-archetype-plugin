@@ -1,4 +1,6 @@
 ## gradle-archetype-plugin
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Flodsve%2Flodsve-gradle-archetype-plugin.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Flodsve%2Flodsve-gradle-archetype-plugin?ref=badge_shield)
+
 
 Maven archetype like plugin for Gradle.
 Generating projects from local template.
@@ -181,3 +183,7 @@ It follows ant style. The tailing slash for directory is mandatory.
  * The generation will fail by default, if there are files with the same name exist in the `generated` folder.
  * Added `clean` task that will have `generated` folder recreated.
  * Changed `print` and `println` to logger, so please append `-i` args to have the log printed out.
+
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Flodsve%2Flodsve-gradle-archetype-plugin.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Flodsve%2Flodsve-gradle-archetype-plugin?ref=badge_large)
