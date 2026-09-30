@@ -1,0 +1,11 @@
+# 可重建的索引与本机运行缓存
+/kg/
+/embedding*
+/search-*
+/wiki-index*
+/spec-analytics.jsonl
+/knowledge-usage*
+*.lock
+*.tmp
+/scratch/*
+!/scratch/.gitkeep

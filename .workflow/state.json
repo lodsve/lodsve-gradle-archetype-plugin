@@ -1,0 +1,21 @@
+{
+  "version": "3.1",
+  "project_name": "lodsve-gradle-archetype-plugin",
+  "status": "idle",
+  "current_milestone": null,
+  "current_task_id": null,
+  "milestones": [],
+  "_milestone_schema": "{ id, name, type: 'standard'|'adhoc', status, phases[], phase_slugs{}, roadmap_ref, created_at }",
+  "artifacts": [],
+  "last_updated": "2026-09-30T15:44:54.680Z",
+  "accumulated_context": {
+    "key_decisions": [],
+    "blockers": [],
+    "deferred": [
+      "W001：4 个并行研究代理各重试一次仍返回 502/503，汇总代理也失败，未形成代理研究报告。保留研究开关，后续阶段可重试；本次规范来自直接源码扫描，不宣称完成了并行研究。",
+      "当前索引器未提取 Groovy 源码符号；代码图主要覆盖可识别配置文件，插件实现仍需直接检索。"
+    ]
+  },
+  "transition_history": [],
+  "milestone_history": []
+}
