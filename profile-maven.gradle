@@ -4,7 +4,7 @@ buildscript {
     }
 }
 
-sourceCompatibility = 1.8
+apply plugin: 'maven-publish'
 
 dependencies {
     implementation gradleApi()
@@ -15,14 +15,14 @@ tasks.withType(JavaCompile) {
     options.encoding = "UTF-8"
 }
 
-task sourcesJar(type: Jar) {
+tasks.register('sourcesJar', Jar) {
     from sourceSets.main.allJava
-    classifier = 'sources'
+    archiveClassifier = 'sources'
 }
 
-task javadocJar(type: Jar) {
+tasks.register('javadocJar', Jar) {
     from javadoc
-    classifier = 'javadoc'
+    archiveClassifier = 'javadoc'
 }
 
 javadoc {
@@ -48,56 +48,51 @@ def getRepositoryPassword() {
     return hasProperty('oss_password') ? oss_password : ""
 }
 
-afterEvaluate { project ->
-    uploadArchives {
-        repositories {
-            mavenDeployer {
-                beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
-
-                pom.groupId = project.group
-                pom.artifactId = project.name
-                pom.version = project.version
-
-                repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
-                    authentication(userName: getRepositoryUsername(), password: getRepositoryPassword())
+publishing {
+    publications {
+        named('pluginMaven', MavenPublication) {
+            artifact tasks.named('sourcesJar')
+            artifact tasks.named('javadocJar')
+            pom {
+                name = 'lodsve archetype'
+                description = 'Gradle plugin that creates projects from your own cookie cutter'
+                url = 'https://github.com/lodsve/lodsve-gradle-archetype-plugin'
+                licenses {
+                    license {
+                        name = 'GNU General Public License version 3'
+                        url = 'https://opensource.org/licenses/GPL-3.0'
+                    }
                 }
-                snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
-                    authentication(userName: getRepositoryUsername(), password: getRepositoryPassword())
+                developers {
+                    developer {
+                        id = 'sunhao'
+                        name = '孙昊'
+                        email = 'sunhao.java@gmail.com'
+                    }
                 }
-
-                pom.project {
-                    name "lodsve archetype"
-                    packaging jar
-                    description "Gradle plugin that creates projects from your own cookie cutter"
-                    url "https://github.com/lodsve/lodsve-gradle-archetype-plugin"
-
-                    scm {
-                        url "git@github.com:lodsve/lodsve-gradle-archetype-plugin.git"
-                        connection "scm:git:git@github.com:lodsve/lodsve-gradle-archetype-plugin.git"
-                        developerConnection "scm:git:git@github.com:lodsve/lodsve-gradle-archetype-plugin.git"
-                    }
-
-                    licenses {
-                        license {
-                            name "GNU General Public License version 3"
-                            url "https://opensource.org/licenses/GPL-3.0"
-                        }
-                    }
-
-                    developers {
-                        developer {
-                            id "sunhao"
-                            name "孙昊"
-                            email "sunhao.java@gmail.com"
-                        }
-                    }
+                scm {
+                    url = 'https://github.com/lodsve/lodsve-gradle-archetype-plugin'
+                    connection = 'scm:git:git@github.com:lodsve/lodsve-gradle-archetype-plugin.git'
+                    developerConnection = 'scm:git:git@github.com:lodsve/lodsve-gradle-archetype-plugin.git'
                 }
             }
         }
     }
-
-    signing {
-        required { gradle.taskGraph.hasTask("uploadArchives") }
-        sign configurations.archives
+    repositories {
+        maven {
+            name = 'sonatype'
+            url = uri(project.version.toString().endsWith('SNAPSHOT')
+                    ? 'https://oss.sonatype.org/content/repositories/snapshots/'
+                    : 'https://oss.sonatype.org/service/local/staging/deploy/maven2/')
+            credentials {
+                username = getRepositoryUsername()
+                password = getRepositoryPassword()
+            }
+        }
     }
+}
+
+signing {
+    required { gradle.taskGraph.hasTask('publish') }
+    sign publishing.publications
 }

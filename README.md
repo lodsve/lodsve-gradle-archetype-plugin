@@ -4,6 +4,8 @@
 
 Maven archetype like plugin for Gradle. Generating projects from local template.
 
+源码构建使用 Gradle Wrapper 和 JDK 21；生成项目的 Java 版本由模板及目标应用自行决定。
+
 ### Install
 
 https://plugins.gradle.org/plugin/com.lodsve.archetype
