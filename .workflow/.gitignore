@@ -5,6 +5,7 @@
 /wiki-index*
 /spec-analytics.jsonl
 /knowledge-usage*
+/specs/.hit-log.jsonl
 *.lock
 *.tmp
 /scratch/*
