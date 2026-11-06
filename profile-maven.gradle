@@ -50,7 +50,7 @@ def getRepositoryPassword() {
 
 publishing {
     publications {
-        named('pluginMaven', MavenPublication) {
+        withType(MavenPublication).matching { it.name == 'pluginMaven' }.configureEach {
             artifact tasks.named('sourcesJar')
             artifact tasks.named('javadocJar')
             pom {

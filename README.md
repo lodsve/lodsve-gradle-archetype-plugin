@@ -6,6 +6,8 @@ Maven archetype like plugin for Gradle. Generating projects from local template.
 
 源码构建使用 Gradle Wrapper 和 JDK 21；生成项目的 Java 版本由模板及目标应用自行决定。
 
+如果模板用于生成 Lodsve Boot 应用，当前兼容基线为 Spring Boot Gradle Plugin `4.1.2`、JDK 21、Jakarta API 和 Springdoc OpenAPI 3。插件只负责文件与变量生成，Boot 依赖版本由模板自身的 `build.gradle` 管理。
+
 ### Install
 
 https://plugins.gradle.org/plugin/com.lodsve.archetype
