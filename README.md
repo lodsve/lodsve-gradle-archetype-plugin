@@ -162,7 +162,7 @@ It follows ant style. The tailing slash for directory is mandatory.
 
 ### MongoDB Project Template
 
-The repository includes a Spring Boot application template that demonstrates Spring Data MongoDB and Lodsve's named data source routing. From the plugin repository root, generate a project with:
+**For plugin development**: The repository includes a Spring Boot application template that demonstrates Spring Data MongoDB and Lodsve's named data source routing. From the plugin repository root, generate a project with:
 
 ```shell
 ./gradlew cleanArchetype generate \
@@ -173,9 +173,10 @@ The repository includes a Spring Boot application template that demonstrates Spr
   -Dversion=1.0.0-SNAPSHOT \
   -Dauthor=Example \
   -Dport=8080 \
-  -DcontextPath=/ \
-  -Dcom.lodsve.gradle.archetype.binding.bootVersion=4.1.2
+  -DcontextPath=/
 ```
+
+**For published plugin users**: Apply the plugin to your project's `build.gradle` and point `-Dtemplates` to a local template directory or create your own template following the plugin's conventions. The `src/main/resources/templates/mongodb` directory in this repository can serve as a reference, but templates are not bundled in the published plugin JAR.
 
 The generated project is written to `generated/`. Start it with an installed Gradle version and set `MONGODB_URI` and `MONGODB_ARCHIVE_URI` when the MongoDB servers differ from the local defaults. The sample exposes save and query endpoints for both the default data source and the `archive` data source.
 
