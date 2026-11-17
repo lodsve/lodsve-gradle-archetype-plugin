@@ -173,10 +173,12 @@ It follows ant style. The tailing slash for directory is mandatory.
   -Dversion=1.0.0-SNAPSHOT \
   -Dauthor=Example \
   -Dport=8080 \
-  -DcontextPath=/
+  -DcontextPath=/ \
+  -Dcom.lodsve.gradle.archetype.binding.springBootVersion=4.1.2 \
+  -Dcom.lodsve.gradle.archetype.binding.lodsveBootVersion=1.0.4-SNAPSHOT
 ```
 
-**For published plugin users**: Apply the plugin to your project's `build.gradle` and point `-Dtemplates` to a local template directory or create your own template following the plugin's conventions. The `src/main/resources/templates/mongodb` directory in this repository can serve as a reference, but templates are not bundled in the published plugin JAR.
+**For published plugin users**: Apply the plugin to your project's `build.gradle` and point `-Dtemplates` to a local template directory or create your own template following the plugin's conventions. The MongoDB template is packaged in the plugin JAR, but the generator reads templates from the file system and does not extract classpath resources. Copy the `src/main/resources/templates/mongodb` directory from this repository (or extract it from the plugin JAR) to a local directory and pass that path to `-Dtemplates`.
 
 The generated project is written to `generated/`. Start it with an installed Gradle version and set `MONGODB_URI` and `MONGODB_ARCHIVE_URI` when the MongoDB servers differ from the local defaults. The sample exposes save and query endpoints for both the default data source and the `archive` data source.
 
