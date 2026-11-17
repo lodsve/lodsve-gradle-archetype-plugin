@@ -1,0 +1,17 @@
+server:
+  port: "@port@"
+  servlet:
+    context-path: "@contextPath@"
+
+spring:
+  mongodb:
+    uri: ${MONGODB_URI:mongodb://localhost:27017/@artifactId@}
+
+lodsve:
+  swagger:
+    enabled: true
+  mongo:
+    default-data-source-name: default
+    data-source:
+      archive:
+        uri: ${MONGODB_ARCHIVE_URI:mongodb://localhost:27017/@artifactId@_archive}
